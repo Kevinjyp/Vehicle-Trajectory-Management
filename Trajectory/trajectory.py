@@ -63,7 +63,6 @@ def main():
                 #     gray_sum += binary_foregourd_img[340, y]
                 # gray_sum_list_left_lane.append(gray_sum)
 
-                # TODO oepning, closing
                 # Morphological Operation
                 kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (3, 3))
                 morphology_img = cv2.morphologyEx(binary_foregourd_img, cv2.MORPH_OPEN, kernel)
@@ -83,27 +82,27 @@ def main():
                 # Get Moment Information of Image
                 vehicle_info = get_img_moment(processed_img, frame_num, vehicle_info_all)
 
-                # # Graw Central Point and Theta
-                # for key, value in vehicle_info.items():
-                #     center = (int(vehicle_info[key]['cx']), int(vehicle_info[key]['cy']))
-                #     cv2.circle(source_img, center, 2, (0, 0, 255))
-                #     height = 50 * math.tan(math.radians(vehicle_info[key]['theta']))
-                #     start = (int(vehicle_info[key]['cx'] - 25), int(vehicle_info[key]['cy'] + height))
-                #     end = (int(vehicle_info[key]['cx'] + 25), int(vehicle_info[key]['cy'] - height))
-                #     cv2.line(source_img, start, end, (0, 255, 0), thickness=3)
-                #
-                # # Image Show
-                # frame_list = [source_img, processed_img]
-                # name_list = ['source_img', 'processed_img']
-                # img_show_list(name_list, frame_list)
-                #
+                # Graw Central Point and Theta
+                for key, value in vehicle_info.items():
+                    center = (int(vehicle_info[key]['cx']), int(vehicle_info[key]['cy']))
+                    cv2.circle(source_img, center, 2, (0, 0, 255))
+                    height = 50 * math.tan(math.radians(vehicle_info[key]['theta']))
+                    start = (int(vehicle_info[key]['cx'] - 25), int(vehicle_info[key]['cy'] + height))
+                    end = (int(vehicle_info[key]['cx'] + 25), int(vehicle_info[key]['cy'] - height))
+                    cv2.line(source_img, start, end, (0, 255, 0), thickness=3)
+
+                # Image Show
+                frame_list = [source_img, processed_img]
+                name_list = ['source_img', 'processed_img']
+                img_show_list(name_list, frame_list)
+
                 # # Save Theta on the Picture
                 # processed_path = os.path.join(base_path, "Picture", video_name, "Processed")
                 # source_path = os.path.join(base_path, "Picture", video_name, "Source")
                 # my_save_picture(processed_path, processed_img, frame_num)
                 # my_save_picture(source_path, source_img, frame_num)
 
-        if (cv2.waitKey(1) & 0xff == ord("q")) | frame_num >= 5000:
+        if (cv2.waitKey(100) & 0xff == ord("q")) | frame_num >= 5000:
             break
 
     # Save Vehicle Position and Direction Information
@@ -203,7 +202,7 @@ def draw_contours(binary_img, source_img):
 
 def judge_contour(x, y, w, h):
     area = w * h
-    if 600 < area < 10000:
+    if 1200 < area < 10000:
         return True
     return False
 

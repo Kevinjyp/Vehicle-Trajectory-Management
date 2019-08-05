@@ -52,7 +52,29 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.pointCloud">
+  <component name="RunManager" selected="Python.trajectory">
+    <configuration name="cluster" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="Trajectory" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/cluster.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="pointCloud" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="Trajectory" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -146,12 +168,14 @@
       <item itemvalue="Python.trajectory" />
       <item itemvalue="Python.pointCloud" />
       <item itemvalue="Python.test" />
+      <item itemvalue="Python.cluster" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.trajectory" />
+        <item itemvalue="Python.cluster" />
         <item itemvalue="Python.pointCloud" />
         <item itemvalue="Python.test" />
-        <item itemvalue="Python.trajectory" />
         <item itemvalue="Python.video2pic" />
       </list>
     </recent_temporary>
@@ -172,6 +196,7 @@
       <workItem from="1564505193642" duration="7909000" />
       <workItem from="1564581063066" duration="28019000" />
       <workItem from="1564692532836" duration="2248000" />
+      <workItem from="1564965020016" duration="7619000" />
     </task>
     <servers />
   </component>
@@ -188,7 +213,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/trajectory.py</url>
-          <line>156</line>
+          <line>155</line>
           <option name="timeStamp" value="25" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
@@ -196,8 +221,18 @@
           <line>39</line>
           <option name="timeStamp" value="27" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/cluster.py</url>
+          <line>41</line>
+          <option name="timeStamp" value="35" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
+    <watches-manager>
+      <configuration name="PythonConfigurationType">
+        <watch expression="theta" />
+      </configuration>
+    </watches-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/LBP$test.coverage" NAME="test Coverage Results" MODIFIED="1564454619522" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
@@ -206,8 +241,9 @@
     <SUITE FILE_PATH="coverage/LBP$findPixel.coverage" NAME="findPixel Coverage Results" MODIFIED="1564424186653" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Trajectory$test.coverage" NAME="test Coverage Results" MODIFIED="1564694601591" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Trajectory$wenxing.coverage" NAME="wenxing Coverage Results" MODIFIED="1564683596683" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/Trajectory$trajectory.coverage" NAME="trajectory Coverage Results" MODIFIED="1564692792985" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/Trajectory$pointCloud.coverage" NAME="pointCloud Coverage Results" MODIFIED="1564694806551" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Trajectory$trajectory.coverage" NAME="trajectory Coverage Results" MODIFIED="1565012891273" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Trajectory$cluster.coverage" NAME="cluster Coverage Results" MODIFIED="1564970492556" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Trajectory$pointCloud.coverage" NAME="pointCloud Coverage Results" MODIFIED="1564965578721" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Trajectory$lbp.coverage" NAME="lbp Coverage Results" MODIFIED="1564581636081" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

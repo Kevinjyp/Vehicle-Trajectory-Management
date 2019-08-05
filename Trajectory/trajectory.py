@@ -6,10 +6,14 @@ import json
 import os
 
 base_path = 'E:/MIT'
-# video_name = 'car_surveillnace.avi'
-# video_name = 'Loop.North.Zhongshan-East-G-1-20141028075000-20141028075916-1657796.ts'
-video_name = 'Loop.North.Zhongshan-West-G-1-20141028075000-20141028075941-1716171.ts'
-path = os.path.join(base_path, "video", video_name)
+video_list = ['car_surveillnace.avi',
+              'Loop.North.Zhongshan-East-G-1-20141028075000-20141028075916-1657796.ts',
+              'Loop.North.Zhongshan-West-G-1-20141028075000-20141028075941-1716171.ts',
+              'video1.mp4',
+              'video2.mp4']
+video_name = video_list[3]
+
+path = os.path.join(base_path, 'video', video_name)
 
 frame_num = 0
 current_frame = 0
@@ -29,7 +33,7 @@ def main():
     #     gray_sum_list = []
 
     if not cap.isOpened():
-        print("Error opening video stream")
+        print('Error opening video stream')
 
     fgbg = cv2.createBackgroundSubtractorMOG2()
 
@@ -66,7 +70,7 @@ def main():
                 # Morphological Operation
                 kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (3, 3))
                 morphology_img = cv2.morphologyEx(binary_foregourd_img, cv2.MORPH_OPEN, kernel)
-                kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (13, 13))
+                kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (5, 5))
                 morphology_img = cv2.morphologyEx(morphology_img, cv2.MORPH_CLOSE, kernel)
 
                 # Decide Which Picture to Use
@@ -97,18 +101,18 @@ def main():
                 img_show_list(name_list, frame_list)
 
                 # # Save Theta on the Picture
-                # processed_path = os.path.join(base_path, "Picture", video_name, "Processed")
-                # source_path = os.path.join(base_path, "Picture", video_name, "Source")
+                # processed_path = os.path.join(base_path, 'Picture', video_name, 'Processed')
+                # source_path = os.path.join(base_path, 'Picture', video_name, 'Source')
                 # my_save_picture(processed_path, processed_img, frame_num)
                 # my_save_picture(source_path, source_img, frame_num)
 
-        if (cv2.waitKey(100) & 0xff == ord("q")) | frame_num >= 5000:
+        if (cv2.waitKey(1) & 0xff == ord('q')) | frame_num >= 2000:
             break
 
     # Save Vehicle Position and Direction Information
     j = json.dumps(vehicle_info_all, indent=1)
-    data_path = os.path.join(base_path, "Processed Data", video_name.split('.')[0] + ".json")
-    f = open(data_path, "w")
+    data_path = os.path.join(base_path, 'Processed Data', video_name.split('.')[0] + '.json')
+    f = open(data_path, 'w')
     f.write(j)
     f.close()
 
@@ -174,7 +178,7 @@ def get_img_moment(img, frame_num, vehicle_info_all):
             car_num += 1
         except ZeroDivisionError:
             err = str(vehicle_info['cx']) + ', ' + str(vehicle_info['cy']) + ', ' + str(frame_num) + '\n'
-            err_path = os.path.join(base_path, "Processed Data", video_name.split('.')[0] + ".txt")
+            err_path = os.path.join(base_path, 'Processed Data', video_name.split('.')[0] + '.txt')
             with open(err_path, 'a+') as f:
                 f.write(err)
 
@@ -202,10 +206,10 @@ def draw_contours(binary_img, source_img):
 
 def judge_contour(x, y, w, h):
     area = w * h
-    if 1200 < area < 10000:
+    if 600 < area < 10000:
         return True
     return False
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     main()

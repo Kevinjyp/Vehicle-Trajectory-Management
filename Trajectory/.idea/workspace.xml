@@ -2,19 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="281e74fc-d022-4561-89c8-ad2d71082587" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/point_cloud.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cluster.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/messigray.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pointCloud.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/point_cloud.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/point_cloud_1_6.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/point_cloud_1_6_cluster.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/trajectory.py" beforeDir="false" afterPath="$PROJECT_DIR$/trajectory.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/video2pic.py" beforeDir="false" afterPath="$PROJECT_DIR$/video2pic.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cloud point/cluster/LOOP.png" beforeDir="false" afterPath="$PROJECT_DIR$/cloud point/cluster/LOOP.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/point_cloud.py" beforeDir="false" afterPath="$PROJECT_DIR$/point_cloud.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -168,7 +158,7 @@
       <workItem from="1564581063066" duration="28019000" />
       <workItem from="1564692532836" duration="2248000" />
       <workItem from="1564965020016" duration="10360000" />
-      <workItem from="1565015979475" duration="976000" />
+      <workItem from="1565015979475" duration="1886000" />
     </task>
     <servers />
   </component>
@@ -213,7 +203,7 @@
     <SUITE FILE_PATH="coverage/Trajectory$video2pic.coverage" NAME="video2pic Coverage Results" MODIFIED="1564583896372" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/LBP$findPixel.coverage" NAME="findPixel Coverage Results" MODIFIED="1564424186653" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Trajectory$test.coverage" NAME="test Coverage Results" MODIFIED="1564694601591" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/Trajectory$point_cloud.coverage" NAME="point_cloud Coverage Results" MODIFIED="1565016952008" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Trajectory$point_cloud.coverage" NAME="point_cloud Coverage Results" MODIFIED="1565017503574" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Trajectory$wenxing.coverage" NAME="wenxing Coverage Results" MODIFIED="1564683596683" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Trajectory$trajectory.coverage" NAME="trajectory Coverage Results" MODIFIED="1565014249904" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Trajectory$cluster.coverage" NAME="cluster Coverage Results" MODIFIED="1564970492556" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />

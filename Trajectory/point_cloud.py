@@ -11,6 +11,7 @@ width_list = [576, 576, 360]
 base = r'E:\MIT\Processed Data'
 name_list = ['car_surveillnace', 'LOOP', 'video1']
 
+# control which video to use
 i = 1
 
 video_name = name_list[i]
@@ -38,7 +39,7 @@ def point_cloud_cluster(vehicle_info_all):
     theta = []
     vehicle_data = []
     weight = 50
-    cluster_num = 6
+    cluster_num = 3
 
     for frame_index, frame_info in vehicle_info_all.items():
         for car_index, vehicle_info in frame_info.items():

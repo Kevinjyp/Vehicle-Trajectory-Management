@@ -4,15 +4,18 @@ import os
 from sklearn.cluster import KMeans, SpectralClustering
 import pandas as pd
 import cv2
+from statistics import mean
 
-height_list = [720, 720, 480]
-width_list = [576, 576, 360]
+height_list = [720, 720, 480, 1920, 640]
+width_list = [576, 576, 360, 1080, 360]
 
 base = r'E:\MIT\Processed Data'
-name_list = ['car_surveillnace', 'LOOP', 'video1']
+name_list = ['car_surveillnace', 'LOOP', 'video1', 'video3', 'video6']
 
-# control which video to use
+# Parameters
 i = 1
+weight = 50
+cluster_num = 3
 
 video_name = name_list[i]
 height = height_list[i]
@@ -38,8 +41,6 @@ def point_cloud_cluster(vehicle_info_all):
     cy = []
     theta = []
     vehicle_data = []
-    weight = 50
-    cluster_num = 3
 
     for frame_index, frame_info in vehicle_info_all.items():
         for car_index, vehicle_info in frame_info.items():
@@ -49,6 +50,7 @@ def point_cloud_cluster(vehicle_info_all):
 
     df = pd.DataFrame(list(zip(cx, cy, theta)), columns=['cx', 'cy', 'theta'])
 
+    theta_min, theta_max = 0, 0
     for index, row in df.iterrows():
         vehicle_data.append([row['cx'], row['cy'], row['theta']])
 
@@ -61,12 +63,43 @@ def point_cloud_cluster(vehicle_info_all):
 
     img = np.zeros((height, width, 3), np.uint8)
 
-    colors = [(0, 0, 255), (0, 255, 0), (255, 0, 0), (255, 255, 0), (255, 0, 255), (0, 255, 255)]
+    # BGR
+    colors = [(0, 0, 255),
+              (0, 255, 0),
+              (255, 0, 0),
+              (255, 255, 0),
+              (255, 0, 255),
+              (0, 255, 255)]
 
     for i, l in enumerate(clustering.labels_):
         cv2.circle(img, (int(cx[i]), int(cy[i])), 1, colors[l], -1)
 
+    cluster_theta = get_cluster_theta(cluster_num, df, clustering.labels_)
+
+    for label in range(cluster_num):
+        cluster_theta[label]['color'] = colors[label]
+
     cv2.imwrite(cluster_point_path, img)
+
+
+def get_cluster_theta(n_cluster, point_df, cluster_label):
+    all_cluster_theta = {}
+    cluster_init = [False for i in range(n_cluster)]
+    for index, row in point_df.iterrows():
+        if not cluster_init[cluster_label[index]]:
+            cluster_init[cluster_label[index]] = True
+            all_cluster_theta[cluster_label[index]] = []
+        all_cluster_theta[cluster_label[index]].append(row['theta']/weight)
+
+    return_list = {}
+    for key, value in all_cluster_theta.items():
+        return_list[key] = {}
+        return_list[key]['min'] = min(value)
+        return_list[key]['max'] = max(value)
+        return_list[key]['avg'] = mean(value)
+        return_list[key]['point_num'] = len(value)
+
+    return return_list
 
 
 def main():

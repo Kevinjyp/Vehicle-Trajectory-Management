@@ -9,11 +9,16 @@ base_path = 'E:/MIT'
 video_list = ['car_surveillnace.avi',
               'Loop.North.Zhongshan-East-G-1-20141028075000-20141028075916-1657796.ts',
               'Loop.North.Zhongshan-West-G-1-20141028075000-20141028075941-1716171.ts',
-              'video1.mp4',
-              'video2.mp4']
-video_name = video_list[3]
+              'video1.mp4', # 3
+              'video2.mp4',
+              'video3.mp4',
+              'video4.mp4',
+              'video5.mp4',
+              'video6.mp4'
+              ]
+video_name = video_list[2]
 
-path = os.path.join(base_path, 'video', video_name)
+path = os.path.join(base_path, 'Video', video_name)
 
 frame_num = 0
 current_frame = 0
@@ -70,7 +75,7 @@ def main():
                 # Morphological Operation
                 kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (3, 3))
                 morphology_img = cv2.morphologyEx(binary_foregourd_img, cv2.MORPH_OPEN, kernel)
-                kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (5, 5))
+                kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (15, 15))
                 morphology_img = cv2.morphologyEx(morphology_img, cv2.MORPH_CLOSE, kernel)
 
                 # Decide Which Picture to Use
@@ -153,11 +158,8 @@ def get_img_moment(img, frame_num, vehicle_info_all):
     car_num = 0
 
     for cnt in contours:
-        # TODO add conditions for contours
         # area, height...
         (x, y, w, h) = cv2.boundingRect(cnt)
-        if frame_num == 583:
-            i = 0
         if not judge_contour(x, y, w, h):
             continue
 

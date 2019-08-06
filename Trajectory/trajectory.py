@@ -106,8 +106,15 @@ def main():
                 img_show_list(name_list, frame_list)
 
                 # # Save Theta on the Picture
-                # processed_path = os.path.join(base_path, 'Picture', video_name, 'Processed')
-                # source_path = os.path.join(base_path, 'Picture', video_name, 'Source')
+                # base_path_pic = processed_path = os.path.join(base_path, 'Picture', video_name)
+                # processed_path = os.path.join(base_path_pic, 'Processed')
+                # source_path = os.path.join(base_path_pic, 'Source')
+                # if not os.path.exists(base_path_pic):
+                #     os.mkdir(base_path_pic)
+                # if not os.path.exists(processed_path):
+                #     os.mkdir(processed_path)
+                # if not os.path.exists(source_path):
+                #     os.mkdir(source_path)
                 # my_save_picture(processed_path, processed_img, frame_num)
                 # my_save_picture(source_path, source_img, frame_num)
 
@@ -160,6 +167,8 @@ def get_img_moment(img, frame_num, vehicle_info_all):
     for cnt in contours:
         # area, height...
         (x, y, w, h) = cv2.boundingRect(cnt)
+        if frame_num == 52:
+            i = 0
         if not judge_contour(x, y, w, h):
             continue
 
@@ -208,7 +217,10 @@ def draw_contours(binary_img, source_img):
 
 def judge_contour(x, y, w, h):
     area = w * h
-    if 600 < area < 10000:
+    height = 576
+    # TODO add more constrains for bounding box
+    # not sure
+    if 600 < area < 10000 and height / 4 - h / 2 < y < 3 * height / 4 - h / 2:
         return True
     return False
 

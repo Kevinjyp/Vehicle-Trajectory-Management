@@ -77,7 +77,14 @@ def point_cloud_cluster(vehicle_info_all):
     cluster_theta = get_cluster_theta(cluster_num, df, clustering.labels_)
 
     for label in range(cluster_num):
-        cluster_theta[label]['color'] = colors[label]
+        cluster_theta[str(label)]['color'] = colors[label]
+
+    # Save Vehicle Position and Direction Information
+    j = json.dumps(cluster_theta, indent=1)
+    data_path = os.path.join(r'G:\留学\MIT暑研\资料\Code\Trajectory\cloud point\cluster', video_name.split('.')[0] + '.json')
+    f = open(data_path, 'w')
+    f.write(j)
+    f.close()
 
     cv2.imwrite(cluster_point_path, img)
 
@@ -93,11 +100,11 @@ def get_cluster_theta(n_cluster, point_df, cluster_label):
 
     return_list = {}
     for key, value in all_cluster_theta.items():
-        return_list[key] = {}
-        return_list[key]['min'] = min(value)
-        return_list[key]['max'] = max(value)
-        return_list[key]['avg'] = mean(value)
-        return_list[key]['point_num'] = len(value)
+        return_list[str(key)] = {}
+        return_list[str(key)]['min'] = min(value)
+        return_list[str(key)]['max'] = max(value)
+        return_list[str(key)]['avg'] = mean(value)
+        return_list[str(key)]['point_num'] = len(value)
 
     return return_list
 

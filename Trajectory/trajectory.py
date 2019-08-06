@@ -75,7 +75,7 @@ def main():
                 # Morphological Operation
                 kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (3, 3))
                 morphology_img = cv2.morphologyEx(binary_foregourd_img, cv2.MORPH_OPEN, kernel)
-                kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (15, 15))
+                kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (13, 13))
                 morphology_img = cv2.morphologyEx(morphology_img, cv2.MORPH_CLOSE, kernel)
 
                 # Decide Which Picture to Use
@@ -111,7 +111,7 @@ def main():
                 # my_save_picture(processed_path, processed_img, frame_num)
                 # my_save_picture(source_path, source_img, frame_num)
 
-        if (cv2.waitKey(1) & 0xff == ord('q')) | frame_num >= 2000:
+        if (cv2.waitKey(1) & 0xff == ord('q')) | frame_num >= 5000:
             break
 
     # Save Vehicle Position and Direction Information

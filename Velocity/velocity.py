@@ -3,8 +3,6 @@ import os
 import numpy as np
 from matplotlib import pyplot as plt
 
-# Read until video is completed
-
 # frameList = []
 # while (cap.isOpened()):
 #     ret, frame = cap.read()

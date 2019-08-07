@@ -7,9 +7,11 @@ import os
 
 base_path = 'E:/MIT'
 video_list = ['car_surveillnace.avi',
-              'Loop.North.Zhongshan-East-G-1-20141028075000-20141028075916-1657796.ts',
-              'Loop.North.Zhongshan-West-G-1-20141028075000-20141028075941-1716171.ts',
-              'video1.mp4', # 3
+              'Zhongshan-East.ts',
+              'Zhongshan-West.ts',
+              'Zhongshan-South.ts',
+              'Zhongshan-North.ts',
+              'video1.mp4', # 5
               'video2.mp4',
               'video3.mp4',
               'video4.mp4',
@@ -128,6 +130,8 @@ def main():
     f.write(j)
     f.close()
 
+    cap.release()
+
 
 def my_save_picture(path, img, frame_num):
     if not os.path.exists(path):
@@ -220,7 +224,8 @@ def judge_contour(x, y, w, h):
     height = 576
     # TODO add more constrains for bounding box
     # not sure
-    if 600 < area < 10000 and height / 4 - h / 2 < y < 3 * height / 4 - h / 2:
+    # if 600 < area < 10000 and height / 4 - h / 2 < y < 3 * height / 4 - h / 2:
+    if 600 < area < 10000:
         return True
     return False
 

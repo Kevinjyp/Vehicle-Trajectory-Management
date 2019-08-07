@@ -6,14 +6,21 @@ import pandas as pd
 import cv2
 from statistics import mean
 
-height_list = [720, 720, 480, 1920, 640]
-width_list = [576, 576, 360, 1080, 360]
+height_list = [720, 720, 720, 720, 720, 480, 1920, 640]
+width_list = [576, 576, 576, 576, 576, 360, 1080, 360]
 
 base = r'E:\MIT\Processed Data'
-name_list = ['car_surveillnace', 'LOOP', 'video1', 'video3', 'video6']
+name_list = ['car_surveillnace',
+             'Zhongshan-East',
+             'Zhongshan-West',
+             'Zhongshan-South',
+             'Zhongshan-North',
+             'video1',
+             'video3',
+             'video6']
 
 # Parameters
-i = 1
+i = 2
 weight = 50
 cluster_num = 3
 
@@ -62,6 +69,9 @@ def point_cloud_cluster(vehicle_info_all):
     print(min(clustering.labels_), max(clustering.labels_))
 
     img = np.zeros((height, width, 3), np.uint8)
+    img_r = np.zeros((height, width, 3), np.uint8)
+    img_g = np.zeros((height, width, 3), np.uint8)
+    img_b = np.zeros((height, width, 3), np.uint8)
 
     # BGR
     colors = [(0, 0, 255),
@@ -73,6 +83,13 @@ def point_cloud_cluster(vehicle_info_all):
 
     for i, l in enumerate(clustering.labels_):
         cv2.circle(img, (int(cx[i]), int(cy[i])), 1, colors[l], -1)
+        if l == 0:
+            cv2.circle(img_r, (int(cx[i]), int(cy[i])), 1, colors[l], -1)
+        elif l == 1:
+            cv2.circle(img_g, (int(cx[i]), int(cy[i])), 1, colors[l], -1)
+        elif l == 2:
+            cv2.circle(img_b, (int(cx[i]), int(cy[i])), 1, colors[l], -1)
+
 
     cluster_theta = get_cluster_theta(cluster_num, df, clustering.labels_)
 
@@ -87,6 +104,13 @@ def point_cloud_cluster(vehicle_info_all):
     f.close()
 
     cv2.imwrite(cluster_point_path, img)
+    cluster_point_path_r = os.path.join('./cloud point/cluster', video_name + '_r'+ '.png')
+    cluster_point_path_g = os.path.join('./cloud point/cluster', video_name + '_g'+ '.png')
+    cluster_point_path_b = os.path.join('./cloud point/cluster', video_name + '_b'+ '.png')
+
+    cv2.imwrite(cluster_point_path_r, img_r)
+    cv2.imwrite(cluster_point_path_g, img_g)
+    cv2.imwrite(cluster_point_path_b, img_b)
 
 
 def get_cluster_theta(n_cluster, point_df, cluster_label):

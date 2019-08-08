@@ -1,7 +1,7 @@
 import json
 import numpy as np
 import os
-from sklearn.cluster import KMeans, SpectralClustering
+from sklearn.cluster import KMeans, SpectralClustering, DBSCAN
 import pandas as pd
 import cv2
 from statistics import mean
@@ -9,10 +9,18 @@ from statistics import mean
 height_list = [720, 720, 720, 720, 720, 480, 1920, 640]
 width_list = [576, 576, 576, 576, 576, 360, 1080, 360]
 
+# BGR
+colors = [(0, 0, 255),
+          (0, 255, 0),
+          (255, 0, 0),
+          (255, 255, 0),
+          (255, 0, 255),
+          (0, 255, 255)]
+
 base = r'E:\MIT\Processed Data'
-name_list = ['car_surveillnace',
-             'Zhongshan-East',
-             'Zhongshan-West',
+name_list = ['car_surveillance',
+             'Zhongshan-East-cap',
+             'Zhongshan-West-cap',
              'Zhongshan-South',
              'Zhongshan-North',
              'video1',
@@ -20,13 +28,13 @@ name_list = ['car_surveillnace',
              'video6']
 
 # Parameters
-i = 2
-weight = 50
-cluster_num = 3
+video_index = 2
+weight = 0
+my_cluster_num = 3
 
-video_name = name_list[i]
-height = height_list[i]
-width = width_list[i]
+video_name = name_list[video_index]
+height = height_list[video_index]
+width = width_list[video_index]
 
 json_path = os.path.join(base, video_name + '.json')
 cloud_point_path = os.path.join('./cloud point/source', video_name + '.png')
@@ -62,36 +70,31 @@ def point_cloud_cluster(vehicle_info_all):
         vehicle_data.append([row['cx'], row['cy'], row['theta']])
 
     # Cluster Method
-    clustering = KMeans(n_clusters=cluster_num, random_state=0).fit(vehicle_data)
-    # clustering = SpectralClustering(n_clusters=cluster_num, assign_labels='discretize', random_state=0).fit(vehicle_data)
+    # clustering = KMeans(n_clusters=my_cluster_num, random_state=0).fit(vehicle_data)
+    # clustering = SpectralClustering(n_clusters=my_cluster_num, assign_labels='discretize', random_state=0).fit(vehicle_data)
+    clustering = DBSCAN(eps=0.5, min_samples=2).fit(vehicle_data)
 
-    print(clustering.labels_)
-    print(min(clustering.labels_), max(clustering.labels_))
+    label_list = []
+    if min(clustering.labels_) < 0:
+        label_list = clustering.labels_ + (0-min(clustering.labels_))
 
+    label_dict = {}
+    for key in label_list:
+        label_dict[key] = label_dict.get(key, 0) + 1
+    print(label_dict)
+
+    cluster_num = len(set(label_list))
+
+    img_list = []
     img = np.zeros((height, width, 3), np.uint8)
-    img_r = np.zeros((height, width, 3), np.uint8)
-    img_g = np.zeros((height, width, 3), np.uint8)
-    img_b = np.zeros((height, width, 3), np.uint8)
+    for i in range(cluster_num):
+        img_list.append(np.zeros((height, width, 3), np.uint8))
 
-    # BGR
-    colors = [(0, 0, 255),
-              (0, 255, 0),
-              (255, 0, 0),
-              (255, 255, 0),
-              (255, 0, 255),
-              (0, 255, 255)]
-
-    for i, l in enumerate(clustering.labels_):
+    for i, l in enumerate(label_list):
         cv2.circle(img, (int(cx[i]), int(cy[i])), 1, colors[l], -1)
-        if l == 0:
-            cv2.circle(img_r, (int(cx[i]), int(cy[i])), 1, colors[l], -1)
-        elif l == 1:
-            cv2.circle(img_g, (int(cx[i]), int(cy[i])), 1, colors[l], -1)
-        elif l == 2:
-            cv2.circle(img_b, (int(cx[i]), int(cy[i])), 1, colors[l], -1)
+        cv2.circle(img[l], (int(cx[i]), int(cy[i])), 1, colors[l], -1)
 
-
-    cluster_theta = get_cluster_theta(cluster_num, df, clustering.labels_)
+    cluster_theta = get_cluster_theta(cluster_num, df, label_list)
 
     for label in range(cluster_num):
         cluster_theta[str(label)]['color'] = colors[label]
@@ -104,13 +107,9 @@ def point_cloud_cluster(vehicle_info_all):
     f.close()
 
     cv2.imwrite(cluster_point_path, img)
-    cluster_point_path_r = os.path.join('./cloud point/cluster', video_name + '_r'+ '.png')
-    cluster_point_path_g = os.path.join('./cloud point/cluster', video_name + '_g'+ '.png')
-    cluster_point_path_b = os.path.join('./cloud point/cluster', video_name + '_b'+ '.png')
-
-    cv2.imwrite(cluster_point_path_r, img_r)
-    cv2.imwrite(cluster_point_path_g, img_g)
-    cv2.imwrite(cluster_point_path_b, img_b)
+    for i in range(cluster_num):
+        tmp_path = os.path.join('./cloud point/cluster', video_name + '_' + str(i) + '.png')
+        cv2.imwrite(tmp_path, img_list[i])
 
 
 def get_cluster_theta(n_cluster, point_df, cluster_label):
@@ -120,8 +119,10 @@ def get_cluster_theta(n_cluster, point_df, cluster_label):
         if not cluster_init[cluster_label[index]]:
             cluster_init[cluster_label[index]] = True
             all_cluster_theta[cluster_label[index]] = []
-        all_cluster_theta[cluster_label[index]].append(row['theta']/weight)
-
+        if not weight == 0 :
+            all_cluster_theta[cluster_label[index]].append(row['theta'] / weight)
+        else:
+            all_cluster_theta[cluster_label[index]].append(0)
     return_list = {}
     for key, value in all_cluster_theta.items():
         return_list[str(key)] = {}

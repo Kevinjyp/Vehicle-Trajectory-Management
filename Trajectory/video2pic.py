@@ -27,5 +27,6 @@ def save_img():
 def main():
     save_img()
 
+
 if __name__ == '__main__':
     main()

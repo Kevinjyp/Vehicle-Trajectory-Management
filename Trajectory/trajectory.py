@@ -18,7 +18,7 @@ video_list = ['car_surveillance.avi',
               'video5.mp4',
               'video6.mp4'
               ]
-video_name = video_list[3]
+video_name = video_list[2]
 
 video_path = os.path.join(base_path, 'Video', video_name)
 
@@ -246,6 +246,8 @@ def check_contour(contours):
     for idx, cnt in enumerate(contours):
         (x, y, w, h) = cv2.boundingRect(cnt)
         if not judge_contour_area(w, h, low_area, high_area):
+            flag[idx] = False
+        if h > 1.2 * w:
             flag[idx] = False
 
     # Discard nesting bounding box

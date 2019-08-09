@@ -30,9 +30,10 @@ name_list = ['car_surveillance',
              'video6']
 
 # Parameters
-video_index = 3
+video_index = 2
 weight = 0
-my_cluster_num = 5
+my_cluster_num = 4
+min_points_in_one_cluster = 100
 
 cv_types = ['spherical', 'tied', 'diag', 'full']
 cv_type = cv_types[1]
@@ -74,37 +75,50 @@ def point_cloud_cluster(vehicle_info_all):
     # Cluster Method
     # clustering = KMeans(n_clusters=my_cluster_num, random_state=0).fit(vehicle_data)
     # clustering = SpectralClustering(n_clusters=my_cluster_num, assign_labels='discretize', random_state=0).fit(vehicle_data)
-    # clustering = DBSCAN(eps=10, min_samples=50).fit(vehicle_data)
-    gmm = mixture.GaussianMixture(n_components=my_cluster_num, covariance_type=cv_type)
+    clustering = DBSCAN(eps=10, min_samples=11).fit(vehicle_data)
+    # gmm = mixture.GaussianMixture(n_components=my_cluster_num, covariance_type=cv_type)
 
-    # label_list = clustering.labels_
-    label_list = gmm.fit_predict(vehicle_data)
-    if min(label_list) < 0:
-        label_list = label_list + (0-min(label_list))
+    # Choose label type
+    label_list = clustering.labels_
+    # label_list = gmm.fit_predict(vehicle_data)
 
     label_dict = {}
     for key in label_list:
         label_dict[key] = label_dict.get(key, 0) + 1
     print(label_dict)
 
-    cluster_num = len(set(label_list))
+    cluster_num = max(label_list)+1
 
+    # Init image
     img_list = []
     img = np.zeros((height, width, 3), np.uint8)
     for i in range(cluster_num):
         img_list.append(np.zeros((height, width, 3), np.uint8))
 
+    # Draw points
     for i, l in enumerate(label_list):
-        cv2.circle(img, (int(cx[i]), int(cy[i])), 1, colors[l], -1)
-        cv2.circle(img_list[l], (int(cx[i]), int(cy[i])), 1, colors[l], -1)
+        if judge_cluster(l, label_dict[l]):
+            cv2.circle(img, (int(cx[i]), int(cy[i])), 1, colors[l], -1)
+            cv2.circle(img_list[l], (int(cx[i]), int(cy[i])), 1, colors[l], -1)
 
     # Save cluster info
-    save_cluster_info(cluster_num, df, label_list)
+    if not weight == 0:
+        save_cluster_info(cluster_num, df, label_list)
 
-    ret_val = cv2.imwrite(os.path.join(base_point, video_name + '_cluster' + ".png"), img)
+    # Save clustering result picture
+    cv2.imwrite(os.path.join(base_point, video_name + '_cluster' + ".png"), img)
     for i in range(cluster_num):
-        tmp_path = os.path.join(base_point, video_name + '_' + str(i) + '.png')
-        cv2.imwrite(tmp_path, img_list[i])
+        if judge_cluster(i, label_dict[i]):
+            tmp_path = os.path.join(base_point, video_name + '_' + str(i) + '.png')
+            cv2.imwrite(tmp_path, img_list[i])
+
+
+def judge_cluster(key, number):
+    if key < 0:
+        return False
+    if number < min_points_in_one_cluster:
+        return False
+    return True
 
 
 def save_cluster_info(n_cluster, point_df, cluster_label):

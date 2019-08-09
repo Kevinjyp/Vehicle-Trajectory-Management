@@ -7,8 +7,8 @@ import pandas as pd
 import cv2
 from statistics import mean
 
-height_list = [720, 720, 720, 720, 720, 480, 1920, 640]
-width_list = [576, 576, 576, 576, 576, 360, 1080, 360]
+width_list = [720, 720, 720, 720, 720, 480, 1920, 640]
+height_list = [576, 576, 576, 576, 576, 360, 1080, 360]
 
 # BGR
 colors = [(0, 0, 255),
@@ -20,7 +20,9 @@ colors = [(0, 0, 255),
 
 name_list = ['car_surveillance',
              'Zhongshan-East-cap',
-             'Zhongshan-West-cap',
+             'Zhongshan-West-cap2',  # 竖直直行
+             'Zhongshan-West-cap3',  # 左右转弯
+             'Zhongshan-West-cap4',  # 水平直行
              'Zhongshan-South',
              'Zhongshan-North',
              'video1',
@@ -28,29 +30,27 @@ name_list = ['car_surveillance',
              'video6']
 
 # Parameters
-video_index = 2
+video_index = 3
 weight = 0
-my_cluster_num = 2
+my_cluster_num = 5
+
 cv_types = ['spherical', 'tied', 'diag', 'full']
-cv_type = cv_types[3]
+cv_type = cv_types[1]
 
 video_name = name_list[video_index]
 height = height_list[video_index]
 width = width_list[video_index]
 
 base_json = r'E:\MIT\Processed Data'
-json_path = os.path.join(base_json, video_name + '.json')
-base_cloud = os.path.join('./PointCloud', video_name)
+base_point = os.path.join('./PointCloud', video_name)
 
 
 def draw_point_cloud(vehicle_info_all):
     img = np.zeros((height, width, 3), np.uint8)
     for frame_num, frame_info in vehicle_info_all.items():
         for car_index, vehicle_info in frame_info.items():
-            # overlay = img.copy()
             cv2.circle(img, (int(vehicle_info['cx']), int(vehicle_info['cy'])), 1, (0, 0, 255), -1)
-            # img = cv2.addWeighted(overlay, alpha, img, 1 - alpha, 0)
-    cv2.imwrite(os.path.join(base_cloud, video_name+'_source', ".png"), img)
+    cv2.imwrite(os.path.join(base_point, video_name + '_source' + ".png"), img)
 
 
 def point_cloud_cluster(vehicle_info_all):
@@ -74,7 +74,7 @@ def point_cloud_cluster(vehicle_info_all):
     # Cluster Method
     # clustering = KMeans(n_clusters=my_cluster_num, random_state=0).fit(vehicle_data)
     # clustering = SpectralClustering(n_clusters=my_cluster_num, assign_labels='discretize', random_state=0).fit(vehicle_data)
-    # clustering = DBSCAN(eps=0.5, min_samples=2).fit(vehicle_data)
+    # clustering = DBSCAN(eps=10, min_samples=50).fit(vehicle_data)
     gmm = mixture.GaussianMixture(n_components=my_cluster_num, covariance_type=cv_type)
 
     # label_list = clustering.labels_
@@ -101,9 +101,9 @@ def point_cloud_cluster(vehicle_info_all):
     # Save cluster info
     save_cluster_info(cluster_num, df, label_list)
 
-    cv2.imwrite(os.path.join(base_cloud, video_name+'_cluster', ".png"), img)
+    ret_val = cv2.imwrite(os.path.join(base_point, video_name + '_cluster' + ".png"), img)
     for i in range(cluster_num):
-        tmp_path = os.path.join(base_cloud, video_name + '_' + str(i) + '.png')
+        tmp_path = os.path.join(base_point, video_name + '_' + str(i) + '.png')
         cv2.imwrite(tmp_path, img_list[i])
 
 
@@ -131,16 +131,20 @@ def save_cluster_info(n_cluster, point_df, cluster_label):
 
     # Save Vehicle Position and Direction Information
     j = json.dumps(theta_dict, indent=1)
-    data_path = os.path.join(base_cloud, video_name.split('.')[0] + '.json')
+    data_path = os.path.join(base_point, video_name.split('.')[0] + '.json')
     f = open(data_path, 'w')
     f.write(j)
     f.close()
 
- 
+
 def main():
-    if not os.path.exists(base_cloud):
-        os.mkdir(base_cloud)
-    json_file = open(json_path)
+    if not os.path.exists(base_point):
+        os.mkdir(base_point)
+    file_list = [f for f in os.listdir(base_point) if f.endswith(".png")]
+    for f in file_list:
+        os.remove(os.path.join(base_point, f))
+
+    json_file = open(os.path.join(base_json, video_name + '.json'))
     json_string = json_file.read()
     vehicle_info_all = json.loads(json_string)
 

@@ -8,9 +8,9 @@ import os
 base_path = 'E:/MIT'
 video_list = ['car_surveillance.avi',
               'Zhongshan-East-cap.mkv',
-              'Zhongshan-West-cap.mkv',
-              'Zhongshan-South.ts',
-              'Zhongshan-North.ts',
+              'Zhongshan-West-cap2.mkv',  # 竖直直行
+              'Zhongshan-West-cap3.mkv',  # 左右转弯
+              'Zhongshan-West-cap4.mkv',  # 水平直行
               'video1.mp4', # 5
               'video2.mp4',
               'video3.mp4',
@@ -18,7 +18,7 @@ video_list = ['car_surveillance.avi',
               'video5.mp4',
               'video6.mp4'
               ]
-video_name = video_list[2]
+video_name = video_list[3]
 
 video_path = os.path.join(base_path, 'Video', video_name)
 
@@ -32,9 +32,9 @@ gray_sum_list_left_lane = []
 vehicle_info_all = {}
 
 # Params
-low_area = 3200
+low_area = 600
 high_area = 10000
-frame_limit = 5000
+frame_limit = 2000
 
 
 def main():
@@ -47,7 +47,7 @@ def main():
     if not cap.isOpened():
         print('Error opening video stream')
 
-    fgbg = cv2.createBackgroundSubtractorMOG2()
+    fgbg = cv2.createBackgroundSubtractorMOG2(100, 36.0, True)
 
     while cap.isOpened():
 
@@ -142,7 +142,7 @@ def my_save_picture(path, img):
 
 def my_gmm(frame, fgbg):
     # Background Learning
-    fgmask = fgbg.apply(frame, learningRate=0.1)
+    fgmask = fgbg.apply(frame, learningRate=0.2)
 
     # Threshold
     _, fgmask = cv2.threshold(fgmask, 20, 255, cv2.THRESH_BINARY)

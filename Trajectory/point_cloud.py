@@ -6,17 +6,11 @@ from sklearn import mixture
 import pandas as pd
 import cv2
 from statistics import mean
+import random
+
 
 width_list = [720, 720, 720, 720, 720, 480, 1920, 640]
 height_list = [576, 576, 576, 576, 576, 360, 1080, 360]
-
-# BGR
-colors = [(0, 0, 255),
-          (0, 255, 0),
-          (255, 0, 0),
-          (255, 255, 0),
-          (255, 0, 255),
-          (0, 255, 255)]
 
 name_list = ['car_surveillance',
              'Zhongshan-East-cap',
@@ -44,6 +38,17 @@ width = width_list[video_index]
 
 base_json = r'E:\MIT\Processed Data'
 base_point = os.path.join('./PointCloud', video_name)
+
+
+def get_n_colors(n_colors):
+    # BGR
+    colors = [(0, 0, 255),
+              (0, 255, 0),
+              (255, 0, 0),
+              (255, 255, 0),
+              (255, 0, 255),
+              (0, 255, 255)]
+    return colors
 
 
 def draw_point_cloud(vehicle_info_all):
@@ -87,13 +92,19 @@ def point_cloud_cluster(vehicle_info_all):
         label_dict[key] = label_dict.get(key, 0) + 1
     print(label_dict)
 
-    cluster_num = max(label_list)+1
+    # Ignore small clusters
+    cluster_num = 0
+    for key, values in label_dict.items():
+        if judge_cluster(key, values):
+            cluster_num = cluster_num + 1
 
     # Init image
     img_list = []
     img = np.zeros((height, width, 3), np.uint8)
     for i in range(cluster_num):
         img_list.append(np.zeros((height, width, 3), np.uint8))
+
+    colors = get_n_colors(cluster_num)
 
     # Draw points
     for i, l in enumerate(label_list):

@@ -62,7 +62,7 @@ Full video : [Loop.North.Zhongshan-West-G-1-20141028075000-20141028075941-171617
 
 #### Original
 
- ![img](https://github.com/Kevinjyp/Code/blob/master/Results/Zhongshan-West-cap3_with_bike/Zhongshan-West-cap3_cluster.png)
+ ![img](https://github.com/Kevinjyp/Code/blob/master/Results/Zhongshan-West-cap4_no_dirction_info/Zhongshan-West-cap4_source.png)
 
 #### Clustering
 
@@ -84,7 +84,7 @@ Full video : [Loop.North.Zhongshan-West-G-1-20141028075000-20141028075941-171617
 
 ##### Type 2 Original
 
-![img](https://github.com/Kevinjyp/Code/blob/master/Results/Zhongshan-West_kmeans(theta)%2Bdbscan/Zhongshan-West_1.png)
+![img](https://github.com/Kevinjyp/Code/blob/master/Results/Zhongshan-West_kmeans(theta)%2Bdbscan/Zhongshan-West_2.png)
 
 ##### DBSCAN Clustering
 
@@ -92,7 +92,7 @@ Full video : [Loop.North.Zhongshan-West-G-1-20141028075000-20141028075941-171617
 
 ##### Type 3 Original
 
-![img](https://github.com/Kevinjyp/Code/blob/master/Results/Zhongshan-West_kmeans(theta)%2Bdbscan/Zhongshan-West_2.png)
+![img](https://github.com/Kevinjyp/Code/blob/master/Results/Zhongshan-West_kmeans(theta)%2Bdbscan/Zhongshan-West_1.png)
 
 ##### DBSCAN Clustering
 

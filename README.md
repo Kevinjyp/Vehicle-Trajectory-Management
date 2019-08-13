@@ -1,7 +1,7 @@
 # Readme
 
 ## What This Repo For
- MIT UV program
+ Universal Village Program @ MIT, supervised by Dr. Fang and Dr. Zhou
  
 ## Used Video Clipes
  'Zhongshan-West-cap2_',  # Vertical Straight

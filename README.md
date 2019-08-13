@@ -13,12 +13,12 @@
 |-- Code \
 　　|-- README.md \
 　　|-- 组会记录.txt \
-　　|-- track \                                    # Hongkai Chen's Code
+　　|-- track　　　　　　　　　　　　　　　　　　　　　　# Hongkai Chen's Code \
 　　|　　|-- inertial.m \
 　　|　　|-- pro.m \
 　　|　　|-- readme.txt \
 　　|　　|-- track.cpp \
-　　|-- Trajectory \                               # My Own Code
+　　|-- Trajectory　　　　　　　　　　　　　　　　　　　# My Own Code　\
 　　|　　|-- point_cloud.py \                      
 　　|　　|-- trajectory.py \
 　　|　　|-- video2pic.py 

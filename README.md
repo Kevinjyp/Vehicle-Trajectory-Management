@@ -13,7 +13,7 @@
 |-- Code \
 　　|-- README.md \
 　　|-- 组会记录.txt \
-　　|-- track　　　　　　　　　　　　　　　　　　　　　　# Hongkai Chen's Code \
+　　|-- track　　　　　　　　　　　　　　　　　　　　　# Hongkai Chen's Code \
 　　|　　|-- inertial.m \
 　　|　　|-- pro.m \
 　　|　　|-- readme.txt \

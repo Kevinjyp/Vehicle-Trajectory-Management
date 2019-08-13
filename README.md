@@ -3,6 +3,20 @@
 ## What This Repo For
  Universal Village Program @ MIT, supervised by Dr. Fang and Dr. Zhou
  
+## What Different Files For
+- Code
+	- track
+		- inertial.m
+		- pro.m
+		- readme.txt
+		- track.cpp
+	- Trajecoty
+		- point_cloud.py
+		- trajecoty.py
+		- video2pic.py
+	- README.md
+	- 组会记录.txt
+ 
 ## Used Video Clipes
 Full video : [Loop.North.Zhongshan-West-G-1-20141028075000-20141028075941-1716171](https://drive.google.com/drive/folders/1W9AdAk36azt9QE6cmIQXET2HP-NAiFtI)
  - 'Zhongshan-West-cap2_',  # Vertical Straight, 01:16-02:03

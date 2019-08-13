@@ -11,3 +11,10 @@
  'Zhongshan-West-cap4',  # Horizontal Straight
  
  'Zhongshan-West',  # all 5000 frames
+ 
+ ## Used Method
+ - Image Moments
+ - K-Means
+ - DBSCAN
+ 
+ 

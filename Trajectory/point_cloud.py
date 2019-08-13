@@ -54,7 +54,10 @@ def draw_point_cloud(vehicle_info_all, path):
     for frame_num, frame_info in vehicle_info_all.items():
         for car_index, vehicle_info in frame_info.items():
             cv2.circle(img, (int(vehicle_info['cx']), int(vehicle_info['cy'])), 1, (0, 0, 255), -1)
-    cv2.imwrite(os.path.join(path, video_name + '_source' + ".png"), img)
+    if not os.path.exists(path):
+        os.mkdir(path)
+    i = cv2.imwrite(os.path.join(path, video_name + '_source' + ".png"), img)
+    j = 0
 
 
 def point_cloud_cluster(vehicle_info_all):
@@ -224,7 +227,8 @@ def my_img_write(path, img, img_list):
         os.mkdir(path)
     file_list = [f for f in os.listdir(path) if f.endswith(".png")]
     for f in file_list:
-        os.remove(os.path.join(path, f))
+        if not "source" in f:
+            os.remove(os.path.join(path, f))
 
     cv2.imwrite(os.path.join(path, video_name + '_cluster' + ".png"), img)
     for i in range(len(img_list)):

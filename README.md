@@ -19,7 +19,7 @@
 　　|　　|-- readme.txt \
 　　|　　|-- track.cpp \
 　　|-- Trajectory　　　　　　　　　　　　　　　　　　　# My Own Code　\
-　　|　　|-- point_cloud.py \                      
+　　|　　|-- point_cloud.py                       
 　　|　　|-- trajectory.py \
 　　|　　|-- video2pic.py 
  

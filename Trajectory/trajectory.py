@@ -11,14 +11,9 @@ video_list = ['car_surveillance.avi',
               'Zhongshan-West-cap2.mkv',  # 竖直直行
               'Zhongshan-West-cap3.mkv',  # 左右转弯
               'Zhongshan-West-cap4.mkv',  # 水平直行
-              'video1.mp4', # 5
-              'video2.mp4',
-              'video3.mp4',
-              'video4.mp4',
-              'video5.mp4',
-              'video6.mp4'
+              'Zhongshan-West.ts',  # all 5000 frames
               ]
-video_name = video_list[2]
+video_name = video_list[5]
 
 video_path = os.path.join(base_path, 'Video', video_name)
 
@@ -32,9 +27,9 @@ gray_sum_list_left_lane = []
 vehicle_info_all = {}
 
 # Params
-low_area = 600
+low_area = 1800
 high_area = 10000
-frame_limit = 2000
+frame_limit = 5000
 
 
 def main():
@@ -247,6 +242,7 @@ def check_contour(contours):
         (x, y, w, h) = cv2.boundingRect(cnt)
         if not judge_contour_area(w, h, low_area, high_area):
             flag[idx] = False
+        # For bicycles and people
         if h > 1.2 * w:
             flag[idx] = False
 

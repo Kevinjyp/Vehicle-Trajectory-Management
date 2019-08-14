@@ -31,8 +31,8 @@ cv_types = ['spherical', 'tied', 'diag', 'full']
 cv_type = cv_types[1]
 
 video_name = name_list[video_index]
-height = 720
-width = 576
+height = 576
+width = 720
 
 base_json = r'E:\MIT\Processed Data'
 base_point = os.path.join('./PointCloud', video_name)

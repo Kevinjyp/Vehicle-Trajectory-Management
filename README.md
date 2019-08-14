@@ -1,7 +1,7 @@
 # Readme
 
 ## Basic Information
- Project : Vehicle Segmentation and Trajectory Management 
+ Project : Vehicle Segmentation and Trajectory Clustering 
 
  Place : Universal Village Program @ MIT, supervised by Dr. Fang and Dr. Zhou
 

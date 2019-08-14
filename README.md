@@ -42,58 +42,84 @@ Full video : [Loop.North.Zhongshan-West-G-1-20141028075000-20141028075941-171617
 
 #### Original
 
- ![img](https://github.com/Kevinjyp/Code/blob/master/Results/Zhongshan-West-cap2_right_turning/Zhongshan-West-cap2__source.png)
-
+<center>
+<img src="https://github.com/Kevinjyp/Code/blob/master/Results/Zhongshan-West-cap2_right_turning/Zhongshan-West-cap2__source.png" width="25%" height="25%" />
+</center>
+ 
 ### Clustering
 
- ![img](https://github.com/Kevinjyp/Code/blob/master/Results/Zhongshan-West-cap2_right_turning/Zhongshan-West-cap2__cluster.png)
+<center>
+<img src="https://github.com/Kevinjyp/Code/blob/master/Results/Zhongshan-West-cap2_right_turning/Zhongshan-West-cap2__cluster.png" width="25%" height="25%" />
+</center>
 
 ### Left Turning
 
 #### Original
 
- ![img](https://github.com/Kevinjyp/Code/blob/master/Results/Zhongshan-West-cap3_with_bike/Zhongshan-West-cap3_source.png)
+<center>
+<img src="https://github.com/Kevinjyp/Code/blob/master/Results/Zhongshan-West-cap3_with_bike/Zhongshan-West-cap3_source.png" width="25%" height="25%" />
+</center>
 
 #### Clustering
 
- ![img](https://github.com/Kevinjyp/Code/blob/master/Results/Zhongshan-West-cap3_with_bike/Zhongshan-West-cap3_cluster.png)
+<center>
+<img src="https://github.com/Kevinjyp/Code/blob/master/Results/Zhongshan-West-cap3_with_bike/Zhongshan-West-cap3_cluster.png" width="25%" height="25%" />
+</center>
 
 ### Horizontal Straight
 
 #### Original
 
- ![img](https://github.com/Kevinjyp/Code/blob/master/Results/Zhongshan-West-cap4_no_dirction_info/Zhongshan-West-cap4_source.png)
+<center>
+<img src="https://github.com/Kevinjyp/Code/blob/master/Results/Zhongshan-West-cap4_no_dirction_info/Zhongshan-West-cap4_source.png" width="25%" height="25%" />
+</center>
 
 #### Clustering
 
- ![img](https://github.com/Kevinjyp/Code/blob/master/Results/Zhongshan-West-cap4_no_dirction_info/Zhongshan-West-cap4_cluster.png)
+<center>
+<img src="https://github.com/Kevinjyp/Code/blob/master/Results/Zhongshan-West-cap4_no_dirction_info/Zhongshan-West-cap4_cluster.png" width="25%" height="25%" />
+</center>
 
 ### Full Video
 
 #### K-means Clustering with Theta
 
-![img](https://github.com/Kevinjyp/Code/blob/master/Results/Zhongshan-West_kmeans(theta)%2Bdbscan/Zhongshan-West_cluster.png)
+<center>
+<img src="https://github.com/Kevinjyp/Code/blob/master/Results/Zhongshan-West_kmeans(theta)%2Bdbscan/Zhongshan-West_cluster.png" width="25%" height="25%" />
+</center>
 
 ##### Type 1 original
 
-![img](https://github.com/Kevinjyp/Code/blob/master/Results/Zhongshan-West_kmeans(theta)%2Bdbscan/Zhongshan-West_0.png)
+<center>
+<img src="https://github.com/Kevinjyp/Code/blob/master/Results/Zhongshan-West_kmeans(theta)%2Bdbscan/Zhongshan-West_0.png" width="25%" height="25%" />
+</center>
 
 ##### DBSCAN Clustering 
 
-![img](https://github.com/Kevinjyp/Code/blob/master/Results/Zhongshan-West_kmeans(theta)%2Bdbscan/Twice0/Zhongshan-West_cluster.png)
+<center>
+<img src="https://github.com/Kevinjyp/Code/blob/master/Results/Zhongshan-West_kmeans(theta)%2Bdbscan/Twice0/Zhongshan-West_cluster.png" width="25%" height="25%" />
+</center>
 
 ##### Type 2 Original
 
-![img](https://github.com/Kevinjyp/Code/blob/master/Results/Zhongshan-West_kmeans(theta)%2Bdbscan/Zhongshan-West_2.png)
+<center>
+<img src="https://github.com/Kevinjyp/Code/blob/master/Results/Zhongshan-West_kmeans(theta)%2Bdbscan/Zhongshan-West_2.png" width="25%" height="25%" />
+</center>
 
 ##### DBSCAN Clustering
 
-![img](https://github.com/Kevinjyp/Code/blob/master/Results/Zhongshan-West_kmeans(theta)%2Bdbscan/Twice1/Zhongshan-West_cluster.png)
+<center>
+<img src="https://github.com/Kevinjyp/Code/blob/master/Results/Zhongshan-West_kmeans(theta)%2Bdbscan/Twice1/Zhongshan-West_cluster.png" width="25%" height="25%" />
+</center>
 
 ##### Type 3 Original
 
-![img](https://github.com/Kevinjyp/Code/blob/master/Results/Zhongshan-West_kmeans(theta)%2Bdbscan/Zhongshan-West_1.png)
+<center>
+<img src="https://github.com/Kevinjyp/Code/blob/master/Results/Zhongshan-West_kmeans(theta)%2Bdbscan/Zhongshan-West_1.png" width="25%" height="25%" />
+</center>
 
 ##### DBSCAN Clustering
 
-![img](https://github.com/Kevinjyp/Code/blob/master/Results/Zhongshan-West_kmeans(theta)%2Bdbscan/Twice2/Zhongshan-West_cluster.png)
+<center>
+<img src="https://github.com/Kevinjyp/Code/blob/master/Results/Zhongshan-West_kmeans(theta)%2Bdbscan/Twice2/Zhongshan-West_cluster.png" width="25%" height="25%" />
+</center>

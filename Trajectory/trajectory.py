@@ -29,7 +29,7 @@ vehicle_info_all = {}
 # Params
 low_area = 1800
 high_area = 10000
-frame_limit = 5000
+frame_limit = 2000
 
 
 def main():
@@ -89,31 +89,23 @@ def main():
                 contours = check_contour(contours)
 
                 # Draw Contours
-                source_img = draw_contours(source_img, contours)
+                contours_img = source_img.copy()
+                draw_contours(contours_img, contours)
 
                 # Get Moment Information of Image from contours
                 vehicle_info = get_img_moment(contours)
 
                 # Draw Central Point and Theta
-                source_img = draw_theta(source_img, vehicle_info)
+                contours_img = draw_theta(contours_img, vehicle_info)
+
+                frame_list = [source_img, processed_img, binary_foregourd_img, contours_img]
+                name_list = ['source_img', 'processed_img', 'binary_foregourd_img', 'contours_img']
 
                 # Image Show
-                frame_list = [source_img, processed_img]
-                name_list = ['source_img', 'processed_img']
                 img_show_list(name_list, frame_list)
 
-                # Save Theta on the Picture
-                base_path_pic = processed_path = os.path.join(base_path, 'Picture', video_name)
-                processed_path = os.path.join(base_path_pic, 'Processed')
-                source_path = os.path.join(base_path_pic, 'Source')
-                if not os.path.exists(base_path_pic):
-                    os.mkdir(base_path_pic)
-                if not os.path.exists(processed_path):
-                    os.mkdir(processed_path)
-                if not os.path.exists(source_path):
-                    os.mkdir(source_path)
-                my_save_picture(processed_path, processed_img)
-                my_save_picture(source_path, source_img)
+                # Image Save
+                save_picture_list(name_list, frame_list)
 
         if (cv2.waitKey(1) & 0xff == ord('q')) | frame_num >= frame_limit:
             break
@@ -128,11 +120,16 @@ def main():
     cap.release()
 
 
-def my_save_picture(path, img):
+def save_picture_list(name_list, frame_list):
     global frame_num
-    if not os.path.exists(path):
-        os.mkdir(path)
-    cv2.imwrite(os.path.join(path, str(frame_num) + '.jpg'), img)
+    for name, frame in zip(name_list, frame_list):
+        pic_path = os.path.join(base_path, 'Picture', video_name.split('.')[0])
+        if not os.path.exists(pic_path):
+            os.mkdir(pic_path)
+        path = os.path.join(pic_path, name)
+        if not os.path.exists(path):
+            os.mkdir(path)
+        cv2.imwrite(os.path.join(path, str(frame_num) + '.jpg'), frame)
 
 
 def my_gmm(frame, fgbg):
@@ -212,12 +209,11 @@ def img_show_list(name_list, frame_list):
         cv2.imshow(name, frame)
 
 
-def draw_contours(source_img, contours):
+def draw_contours(contours_img, contours):
     # rect contours
     for cnt in contours:
         (x, y, w, h) = cv2.boundingRect(cnt)
-        cv2.rectangle(source_img, (x, y), (x + w, y + h), (0, 255, 0), 2)
-    return source_img
+        cv2.rectangle(contours_img, (x, y), (x + w, y + h), (0, 255, 0), 2)
 
 
 def draw_theta(source_img, vehicle_info):

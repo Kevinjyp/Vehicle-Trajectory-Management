@@ -38,6 +38,12 @@ Full video : [Loop.North.Zhongshan-West-G-1-20141028075000-20141028075941-171617
 
 ## Results
 
+### Workflow
+
+<center>
+<img src="https://github.com/Kevinjyp/Vehicle-Trajectory-Management/blob/master/Workflow.png" width="75%" height="75%" />
+</center>
+
 ### Vertical Straight
 
 #### Original

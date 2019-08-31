@@ -1,5 +1,7 @@
 # Readme
 
+A novel algorithm to cluster vehicle moving trajectory with the information of vehicle moving direction, which can successfully solve the problem in clustering "cross-over" trajectory.
+
 ## Basic Information
  Project : Vehicle Segmentation and Trajectory Clustering 
 

@@ -8,10 +8,6 @@ import cv2
 from statistics import mean
 import random
 
-
-width_list = [720, 720, 720, 720, 720, 480, 1920, 640]
-height_list = [576, 576, 576, 576, 576, 360, 1080, 360]
-
 name_list = ['car_surveillance',
              'Zhongshan-East-cap',
              'Zhongshan-West-cap2_',  # 竖直直行
@@ -45,8 +41,11 @@ def get_n_colors(n_colors):
               (255, 0, 0),
               (255, 255, 0),
               (255, 0, 255),
-              (0, 255, 255)]
-    return colors
+              (0, 255, 255),
+              (139, 35, 35),
+              (139, 101, 8),
+              (255, 250, 250)]
+    return colors[0:n_colors]
 
 
 def draw_point_cloud(vehicle_info_all, path):
@@ -57,7 +56,6 @@ def draw_point_cloud(vehicle_info_all, path):
     if not os.path.exists(path):
         os.mkdir(path)
     i = cv2.imwrite(os.path.join(path, video_name + '_source' + ".png"), img)
-    j = 0
 
 
 def point_cloud_cluster(vehicle_info_all):
@@ -96,6 +94,9 @@ def point_cloud_cluster(vehicle_info_all):
         for index, row in df.iterrows():
             vehicle_data_twice[label_list[index]].append([row['cx'], row['cy']])
 
+        img_cluster_all = np.zeros((height, width, 3), np.uint8)
+        color_counts = 0
+
         for type_index, v_data in enumerate(vehicle_data_twice):
             # Clustering Method
             label_list_twice, label_dict_twice, cluster_num_twice = my_cluster_method(v_data, 'dbscan')
@@ -119,6 +120,20 @@ def point_cloud_cluster(vehicle_info_all):
             for row in v_data:
                 cv2.circle(img_source, (int(row[0]), int(row[1])), 1, (0, 0, 255), -1)
             cv2.imwrite(os.path.join(base_path_cluster, video_name + '_source' + ".png"), img_source)
+
+            # Draw all clusters
+            colors = get_n_colors(9)
+            color_flag = []
+            # Draw points
+            for i, l in enumerate(label_list_twice):
+                if judge_cluster(l, label_dict_twice[l]):
+                    if l not in color_flag:
+                        color_flag.append(l)
+                    cv2.circle(img_cluster_all, (int(cx_twice[i]), int(cy_twice[i])), 1, colors[color_flag.index(l) + color_counts], -1)
+            color_counts = color_counts + len(color_flag)
+
+        i = cv2.imwrite(os.path.join(base_point, video_name + '_all' + ".png"), img_cluster_all)
+        j = 0
 
 
 def my_cluster_method(data, method):
